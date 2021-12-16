@@ -9,8 +9,6 @@ const multer = require("multer");
 
 
 router.post("/register", body("username"), body("password").isLength({ min: 8 }), (req, res, next) => {
-    console.log(req.body.username);
-    console.log(req.body.password);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
