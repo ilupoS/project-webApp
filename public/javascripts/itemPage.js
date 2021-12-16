@@ -20,6 +20,8 @@ function onLoad(event){
 
     const authToken = localStorage.getItem("auth_token");
 
+    navBarGeneration(authToken);
+
     if(authToken){
         createCommentField(urlParams.get("id"));
 
@@ -48,11 +50,12 @@ function generateItemHTML (data) {
     post.id = "post"
     var div = document.createElement("div");
         
-    var p = document.createElement("p");
+    var p = document.createElement("code");
     p.innerHTML = data.items.item;
+    p.style = "white-space: pre-wrap";
 
     var h2 = document.createElement("h2");
-    h2.innerHTML = data.items.username;
+    h2.innerHTML = "Publisher: " + data.items.username;
 
     div.appendChild(h2);
     div.appendChild(p);
@@ -71,8 +74,10 @@ async function fetchComments (id){
 
     for(var i = 0; i < data.items.length; i++){
         var commentDiv = document.createElement("div");
+        commentDiv.className = "card";
+
         var p = document.createElement("p");
-        var h3 = document.createElement("h3");
+        var h3 = document.createElement("h5");
 
         h3.innerHTML = data.items[i].username;
         p.innerHTML = data.items[i].comment;
@@ -132,30 +137,39 @@ function createCommentField(id){
 
 
 }
-/*      var form = document.createElement("form");
-        form.setAttribute("method", "post");
-        form.id = i;
-        form.data = data.items[i]._id;        
-        form.className = "comment-field";
 
-        var addComment = document.createElement("textarea");
-        addComment.id = i + "comment-field";
-    
-  
-        var submitButton = document.createElement("input");
-        submitButton.setAttribute("type", "submit");
-        submitButton.setAttribute("value", "Comment");
-  
-        form.appendChild(addComment);
-        form.appendChild(submitButton);
-        form.style.display = "none"; 
+function navBarGeneration(authToken){
+  var navBar = document.getElementById("nav-mobile");
+  if(authToken){
+    var a_logout = document.createElement("a");
+    a_logout.href = "javascript:logoutFunction();";
+    a_logout.innerHTML = "Logout";
 
-        form.addEventListener("submit", function (e) {
-          e.preventDefault();
-          console.log(this.id);
-          var commentText = document.getElementById(this.id + "comment-field").value;
+    var li = document.createElement("li");
+    li.appendChild(a_logout);
+    navBar.appendChild(li);
+  }
+  else {
+    var a_login = document.createElement("a");
+    a_login.href = "/login.html";
+    a_login.innerHTML = "Login";
 
-          submitComment(authToken, this.data, commentText);
-          location.reload();
-        });
-        div.appendChild(form); */
+    var li = document.createElement("li");
+    li.appendChild(a_login);
+    navBar.appendChild(li);
+
+    var a_register = document.createElement("a");
+    a_register.href = "/register.html";
+    a_register.innerHTML = "Register";
+
+    var li = document.createElement("li");
+    li.appendChild(a_register);
+    navBar.appendChild(li);
+  }
+
+}
+
+function logoutFunction(){
+  localStorage.removeItem("auth_token");
+  location.reload();
+}

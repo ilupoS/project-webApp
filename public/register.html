@@ -3,16 +3,41 @@
     <head>
         <title>Example</title>
         <script src="javascripts/register.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-        <p>register</p>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#!" class="brand-logo hide-on-med-and-down">My site</a>
+                <a href="#!" class="brand-logo center hide-on-med-and-down">Register</a>
+              <ul id="nav-mobile" class="right">
+                <li><a href="/">Home page</a></li>
+                <li><a href="/login.html">Login</a></li>
+                <li><a href="register.html">Register</a></li>
+              </ul>
+            </div>
+          </nav>
+        <div class=container>
+            
         
-        <form id="register" method="post">
-            Username: <input id="username_input" type="username" type="text" /> <br /> 
-            <div id="username_err"></div>
-            Password: <input id="password_input" type="password" type="text" /> <br /> 
-            <div id="password_err"></div>
-            <input type="submit" value="Submit"/>
-        </form>
+            <form id="register" method="post" class=container>
+                <div class="input-field">
+                    <input placeholder="Type username" id="username_input" type="text" class="validate">
+                    <label for="username_input">Username</label>
+                </div>
+                <div class="input-field">
+                    <input placeholder="Type password" id="password_input" type="password" type="text" class="validate">
+                    <label for="password_input">Password</label>
+                </div>
+                <div class="input-field">
+                  <button class="btn" type="submit" value="Submit">Register</button>  
+                </div>
+                <div id="err"></div>
+            </form>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     </body>
 </html>

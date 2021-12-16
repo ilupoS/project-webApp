@@ -5,16 +5,16 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index');
 });
 
 router.get('/login.html', function(req, res, next) {
-  res.render('login', { title: 'Express' });
+  res.render('login');
 });
 
 
 router.get('/register.html', function(req, res, next) {
-  res.render('register', { title: 'Express' });
+  res.render('register');
 });
 
 router.get('/itemPage.html', function(req, res, next) {

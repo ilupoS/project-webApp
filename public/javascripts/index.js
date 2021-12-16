@@ -17,35 +17,44 @@ function onLoad(event){
     //event.preventDefault();
     const page = document.getElementById("con");
     const authToken = localStorage.getItem("auth_token");
+
+    //Generating navbar depending on if user is logged in
+    navBarGeneration(authToken);
     
     //Checking if user has authToken
     if(authToken){
-      var token = atob(authToken.split(".")[1]);
-      var tokenjson = JSON.parse(token);
-
-      let logoutButton = document.createElement("button");
-      let usernameHTML = document.createElement("p");
-      logoutButton.innerHTML = "Logout";
-      logoutButton.id = "logout";
-      
-      usernameHTML.innerHTML = JSON.stringify(tokenjson.username).replace(0, "").slice(1,-1);
-      page.appendChild(logoutButton);
-      page.appendChild(usernameHTML);
-      logoutButton.addEventListener("click", logoutFunction);
-
       //Post form field for posts
       var form = document.createElement("form");
       form.setAttribute("method", "post");
 
+      var div1 = document.createElement("div");
+      var div2 = document.createElement("div");
+
+      div1.className = "input-field";
+      div2.className = "input-field";
+
       let addItem = document.createElement("textarea");
       addItem.id = "add-item";
+      addItem.className = "materialize-textarea";
 
-      var submitButton = document.createElement("input");
+      let label = document.createElement("label");
+      label.for = "add-item";
+      label.innerHTML = "Write your post here";
+
+      div1.appendChild(addItem);
+      div1.appendChild(label);
+
+      var submitButton = document.createElement("button");
       submitButton.setAttribute("type", "submit");
       submitButton.setAttribute("value", "Post");
+      submitButton.id = "submit-comment";
+      submitButton.className = "btn";
+      submitButton.innerHTML = "Post snippet";
 
-      form.appendChild(addItem);
-      form.appendChild(submitButton);
+      div2.appendChild(submitButton);
+
+      form.appendChild(div1);
+      form.appendChild(div2);
 
       form.addEventListener("submit", function (e) {
         e.preventDefault();
@@ -56,21 +65,6 @@ function onLoad(event){
     }
     else{
       //not logged in
-      let loginLink = document.createElement("a");
-      loginLink.href = "/login.html";
-      loginLink.innerHTML = "Login";
-
-      let registerLink = document.createElement("a");
-      registerLink.href = "/register.html";
-      registerLink.innerHTML = "Register";
-
-      let spacing = document.createElement("p");
-      spacing.innerHTML = " ";
-      
-      page.appendChild(loginLink);
-      page.appendChild(spacing);
-      page.appendChild(registerLink);
-
     }
 }
 
@@ -96,16 +90,20 @@ function generateItemHTML (data) {
 
     for (var i = 0; i < data.items.length; i++) {
         var div = document.createElement("div");
+        div.className = "card";
         
-        var p = document.createElement("p");
+        var p = document.createElement("code");
         p.innerHTML = data.items[i].item;
+        p.style = "white-space: pre-wrap";
+        
 
-        var h2 = document.createElement("h2");
-        h2.innerHTML = data.items[i].username;
+        var h2 = document.createElement("h3");
+        h2.innerHTML = "Publisher: " + data.items[i].username;
 
         var button = document.createElement("button");
         button.data = data.items[i]._id;
         button.innerHTML =  "Go to post";
+        button.className = "btn right";
 
         button.addEventListener("click", function (e) {
           console.log(this.data);
@@ -135,4 +133,35 @@ async function submitPost (authToken){
           },
           body: JSON.stringify(data)
       });
+}
+
+function navBarGeneration(authToken){
+  var navBar = document.getElementById("nav-mobile");
+  if(authToken){
+    var a_logout = document.createElement("a");
+    a_logout.href = "javascript:logoutFunction();";
+    a_logout.innerHTML = "Logout";
+
+    var li = document.createElement("li");
+    li.appendChild(a_logout);
+    navBar.appendChild(li);
+  }
+  else {
+    var a_login = document.createElement("a");
+    a_login.href = "/login.html";
+    a_login.innerHTML = "Login";
+
+    var li = document.createElement("li");
+    li.appendChild(a_login);
+    navBar.appendChild(li);
+
+    var a_register = document.createElement("a");
+    a_register.href = "/register.html";
+    a_register.innerHTML = "Register";
+
+    var li = document.createElement("li");
+    li.appendChild(a_register);
+    navBar.appendChild(li);
+  }
+
 }

@@ -3,14 +3,39 @@
     <head>
         <title>Example</title>
         <script src="javascripts/login.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-        <p>login</p>
-        <form id="login">
-            Username: <input id="username_input" type="username" type="text" /> <br /> 
-            Password: <input id="password_input" type="password" type="text" /> <br /> 
-            <div id="err"></div>
-            <input type="submit" value="Submit"/>
-        </form>
+        <nav>
+            <div class="nav-wrapper">
+              <a href="#!" class="brand-logo hide-on-med-and-down">My site</a>
+              <a href="#!" class="brand-logo center hide-on-med-and-down">Login</a>
+              <ul id="nav-mobile" class="right">
+                <li><a href="/">Home page</a></li>
+                <li><a href="/login.html">Login</a></li>
+                <li><a href="register.html">Register</a></li>
+              </ul>
+            </div>
+          </nav>
+        <div class="container">
+            <form id="login" method="post" class="container">
+                <div class="input-field">
+                    <input placeholder="Type username" id="username_input" type="text" class="validate">
+                    <label for="username_input">Username</label>
+                </div>
+                <div class="input-field">
+                    <input id="password_input" type="password" type="text">
+                    <label for="password_input">Password</label>
+                </div>
+                <div class="input-field">
+                    <button class="btn" type="submit" value="Submit">Login</button>  
+                </div>
+                <div id="err"></div>
+            </form>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     </body>
 </html>
