@@ -49,3 +49,6 @@ has right JWT to make requests such as add comment to server side.
 ### MongoDB and Mongoose
 For database I have chosen MongoDB which is document orianted database program. To model this data I have usen mongoose, because it simplifies how to implement saving data to database.
 
+## Features and points
+Only basic features are implemented. Because of that my aim is 25 points.
+
