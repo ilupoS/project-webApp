@@ -24,11 +24,9 @@ function onLoad(event){
 
     if(authToken){
         createCommentField(urlParams.get("id"));
-
       }
       else{
         
-  
       }
 }
 
@@ -121,6 +119,7 @@ function createCommentField(id){
     var submitButton = document.createElement("input");
     submitButton.setAttribute("type", "submit");
     submitButton.setAttribute("value", "Comment");
+    submitButton.className = "btn";
   
     form.appendChild(addComment);
     form.appendChild(submitButton);
