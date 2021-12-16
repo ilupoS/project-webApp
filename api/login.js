@@ -1,11 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require('mongoose');
 const Users = require('../models/User');
 const { body, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const multer = require("multer");
+
 
 
 
