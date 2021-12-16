@@ -35,6 +35,7 @@ async function loginCall(event){
     const responseJSON = await response.json();
     console.log(responseJSON);
     if (!responseJSON.success){
+      if(errDiv.lastChild != null){errDiv.removeChild(errDiv.lastChild)}
       var errP = document.createElement("p");
       errP.innerHTML = "Invalid credentials";
       errDiv.appendChild(errP);

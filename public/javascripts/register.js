@@ -44,8 +44,10 @@ async function registerCall(event){
       for (var i = 0; i < responseJSON.errors.length; i++){
         err.push(JSON.stringify(responseJSON.errors[i].param));
       }
-
+      if(passwordErr.lastChild != null){passwordErr.removeChild(passwordErr.lastChild)}
+      if(usernameErr.lastChild != null){usernameErr.removeChild(usernameErr.lastChild)}
       if (err.includes('"password"')){
+
         var errPasswordP = document.createElement("p");
         errPasswordP.innerHTML = "Password is not strong enough";
         passwordErr.appendChild(errPasswordP);
